@@ -37,7 +37,7 @@ class MpdStatus(object):
     def printStatus(self):
         status = self.mpd.status()
         csong = self.mpd.currentsong()
-        tlen = 35
+        tlen = 20
         
         res = []
         if csong:
@@ -46,7 +46,7 @@ class MpdStatus(object):
                 sformat = '%s [%s%s] %s'
                 tarray = [float(s) for s in status['time'].split(':')]
                 plen = tlen / tarray[1] * tarray[0]
-                tstr = sformat % (time2str(tarray[0]), '='*int(plen), '-'*(tlen - int(plen)), time2str(tarray[1]) )
+                tstr = sformat % (time2str(tarray[0]), '='*int(plen), '--'*(tlen - int(plen)), time2str(tarray[1]) )
                 self.log.debug(tstr)
                 res.append(tstr)
             else:
@@ -298,8 +298,8 @@ class MpdControl(Tkinter.Frame):
 
     def createWidgets(self):
 
-        self.customFont = tkFont.Font(family="Helvetica", size=24)
-        self.customFontText = tkFont.Font(family="Helvetica", size=22)
+        self.customFont = tkFont.Font(family="Helvetica", size=16)
+        self.customFontText = tkFont.Font(family="Helvetica", size=12)
 
         #self.wgUp = Tkinter.Button(self, text = 'up', font = self.customFont)
         #self.wgDown = Tkinter.Button(self, text = 'down', font = self.customFont)
@@ -325,7 +325,7 @@ class MpdControl(Tkinter.Frame):
 
         self.wgStatus = Tkinter.Label(self, text = 'yeahhh\n ups', bg='white', font = self.customFontText)
         self.wgListData = Tkinter.Listbox(self, font = self.customFontText, yscrollcommand=self.wgScrollbar.set)
-        self.wgListData.bind("<Double-Button-1>", self.listItemSelected)
+        self.wgListData.bind("<Button>", self.listItemSelected)
         self.wgScrollbar.config(command = self.wgListData.yview)
         
 
@@ -414,7 +414,7 @@ class MpdControl(Tkinter.Frame):
 if __name__ == "__main__":
     config = {
         'mpd' : {
-            'host' : 'localhost',
+            'host' : 'serverb.fritz.box',
             'port' : '6600'},
         'main': {
             'loglevel' : 'debug',

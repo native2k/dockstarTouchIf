@@ -79,7 +79,7 @@ class ShowImageApp(Tkinter.Frame):
         #self.image.bind("<Button>", self.showDialog)
 
     def quitting(self, event = None):
-        st = self.image.create_text(40, 100, fill='lightgrey', anchor=Tkinter.NW, font=("Purisa", 20,), text=' .. QUTTING .... ', tags=('status'))
+        st = self.image.create_text(40, 100, fill='lightgrey', anchor=Tkinter.NW, font=("Purisa", 30), text=' .. QUTTING .... ', tags=('status'))
         if self.onQuit:
             self.onQuit()
         else:
@@ -145,7 +145,7 @@ class ShowImageApp(Tkinter.Frame):
                 statustext = self.statusFunc()
             except Exception, e:
                 statustext = 'statusError: %s' % e
-            st = self.image.create_text(40, 40, fill='lightgrey', anchor=Tkinter.NW, font=("FixedSys", 20), text=statustext, tags=('status'))
+            st = self.image.create_text(40, 40, fill='lightgrey', anchor=Tkinter.NW, font=("fixed", 16), text=statustext, tags=('status'))
             if self.old_status:
                 self.image.delete(self.old_status)
             self.old_status = st
@@ -289,7 +289,7 @@ class ShowImageApp(Tkinter.Frame):
 if __name__ == "__main__":
     config = {
         'mpd' : {
-            'host' : 'localhost',
+            'host' : 'serverb.fritz.box',
             'port' : '6600'},
         'main': {
             'loglevel' : 'debug',
